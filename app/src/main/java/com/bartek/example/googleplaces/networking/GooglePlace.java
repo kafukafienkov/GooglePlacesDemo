@@ -33,3 +33,11 @@ public class GooglePlace {
         double lng;
     }
 }
+/*
+
+"formatted_address" : "44 Macleay St, Potts Point NSW 2010, Australia",
+        "geometry" : {
+        "location" : {
+        "lat" : -33.87087,
+        "lng" : 151.225459
+        }*/
