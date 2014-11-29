@@ -11,6 +11,8 @@ import com.bartek.example.googleplaces.networking.PlacesList;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -98,11 +100,21 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
+
+        CameraPosition position = new CameraPosition.Builder()
+                .target(new LatLng(52.4, 20.5)).zoom(12).build();
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(position));
+
         mMap.setMyLocationEnabled(true);
 //        mMap.getUiSettings().setZoomControlsEnabled(false);  -> method turns off ZOOM in the map
-        mMap.addMarker(new MarkerOptions().position(new LatLng(52.4546843, 20.564963)).title("Marker"));
+//        mMap.addMarker(new MarkerOptions().position(new LatLng(52.4546843, 20.564963))
+//                .title("My Marker")
+//                .icon(BitmapDescriptorFactory
+//                        .fromResource(R.drawable.atm)));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(52.4, 20.5), 13));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(52.4, 20.5), 13));
+
+
     }
 
     public void setSatellite(View view) {
