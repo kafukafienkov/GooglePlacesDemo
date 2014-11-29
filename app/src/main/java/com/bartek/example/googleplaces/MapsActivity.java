@@ -4,10 +4,18 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.bartek.example.googleplaces.networking.GoogleAPIService;
+import com.bartek.example.googleplaces.networking.GoogleApiRequester;
+import com.bartek.example.googleplaces.networking.GooglePlace;
+import com.bartek.example.googleplaces.networking.PlacesList;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class MapsActivity extends FragmentActivity {
 
@@ -24,6 +32,33 @@ public class MapsActivity extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
+        requestPlaces();
+    }
+
+    private void requestPlaces() {
+
+        GoogleApiRequester requester = new GoogleApiRequester();
+        requester.requestPlaacesInCity("restaurant", "Warsaw", new Callback<PlacesList>() {
+            @Override
+            public void success(PlacesList placesList, Response response) {
+                presentPlaces(placesList);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+
+    private void presentPlaces(PlacesList placesList) {
+        for (GooglePlace place:placesList.getPlaces()) {
+            mMap.addMarker(new MarkerOptions()
+                    .position(
+                            new LatLng(place.getLocationLat()
+                                    , place.getLocationLng()))
+                    .title(place.getAddress()));
+        }
     }
 
     /**

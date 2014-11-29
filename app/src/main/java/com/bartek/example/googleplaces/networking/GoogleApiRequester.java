@@ -9,6 +9,7 @@ import retrofit.RestAdapter;
 public class GoogleApiRequester {
 
     private final String ENDPOINT = "https://maps.googleapis.com/maps/api";
+    private final String KEY = "AIzaSyCm5xzBuITzPlnaaEHR69gzA6DyD7OQKJY";
 
     public void requestPlaacesInCity(String placeName
             , String cityName
@@ -22,6 +23,8 @@ public class GoogleApiRequester {
         GoogleAPIService service = adapter.create(GoogleAPIService.class);
 
 
+        String placeParam = placeName + "+in+" + cityName;
+        service.getPlacesForCity(placeParam, KEY, callback);
     }
 }
 

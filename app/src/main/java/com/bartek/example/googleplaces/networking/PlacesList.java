@@ -11,4 +11,8 @@ public class PlacesList {
 
     @SerializedName("results")
     List<GooglePlace> places;
+
+    public List<GooglePlace> getPlaces() {
+        return places;
+    }
 }
