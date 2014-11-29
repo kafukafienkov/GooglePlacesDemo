@@ -8,6 +8,7 @@ import com.bartek.example.googleplaces.networking.GoogleAPIService;
 import com.bartek.example.googleplaces.networking.GoogleApiRequester;
 import com.bartek.example.googleplaces.networking.GooglePlace;
 import com.bartek.example.googleplaces.networking.PlacesList;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -52,6 +53,7 @@ public class MapsActivity extends FragmentActivity {
     }
 
     private void presentPlaces(PlacesList placesList) {
+
         for (GooglePlace place:placesList.getPlaces()) {
             mMap.addMarker(new MarkerOptions()
                     .position(
@@ -99,6 +101,8 @@ public class MapsActivity extends FragmentActivity {
         mMap.setMyLocationEnabled(true);
 //        mMap.getUiSettings().setZoomControlsEnabled(false);  -> method turns off ZOOM in the map
         mMap.addMarker(new MarkerOptions().position(new LatLng(52.4546843, 20.564963)).title("Marker"));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(52.4, 20.5), 13));
     }
 
     public void setSatellite(View view) {
